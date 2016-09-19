@@ -14,7 +14,7 @@ Si ingresas números negativos, te mencionará que eso no se puede; lo mismo par
 Todos los códigos están comentados con sus respectivas descripciones de lo que hacen, para que puedas guiarte y entenderlo.
 
 ======================
-ESPERO TE GUSTE ESTE CÓDIGO, ES LIBRE, PUEDES MOVIFICARLO Y ENRIQUECERLO SI QUIERES. SI LO HACES, POR FAVOR, SÓLO MANTÉN MI AUTORÍA ORIGINAL EN EL CÓDIGO Y PON TU CONTRIBUCIÓN EN EL ARCHIVO “Contributions.rtf”.
+ESPERO TE GUSTE ESTE CÓDIGO, ES LIBRE, PUEDES MOVIFICARLO Y ENRIQUECERLO SI QUIERES.
 
 ———————————————————————————
 Copyright (C) 2016, Christopher Coria Vásquez.

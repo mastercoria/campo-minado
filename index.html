@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html lang="es_MX">
+<!-- 
+
+***************************
+*CAMPO MINADO. Terminado exitosamente el sábado 17 de septiembre de 2016 a las 14:30 horas (GMT -6 [hora central de México]).
+*Funcionamiento disponible en MasterCoria.com: 
+*COPYRIGHT (C) 2016, Christopher Coria Vásquez.
+***************************
+*MINED FILED. Finished successfully on saturday, september 17th of 2016 at 14:30 hours (GMT -6 [central time of Mexico])
+*A preview can be found on MasterCoria.com:
+*COPYRIGHT (C) 2016, Christopher Coria Vasquez.
+************
+*This game is in spanish, so you need to translate every indication that is in the game. 
+***************************
+
+-->
+ <head>
+  <title>Juego de Campo Minado - Por Christopher Coria Vásquez</title>
+  <!-- Codificación UTF-8. -->
+  <meta charset="utf-8"/>
+  <!-- Los estilos y declaraciones CSS de nuestro juego. -->    
+  <link rel="stylesheet" href="css/estilos.css">
+   <!-- Bootstrap.
+   =================================================== -->
+   <link rel="stylesheet" href="js/font-awesome-4.6.3/css/font-awesome.min.css">
+   <!-- jQuery versión 3.1.0
+   =================================================== --> 
+   <script src="js/jquery-3.1.0.min.js"></script>
+   <!-- Archivo responsable del método de envío de tiempo real (AJAX). -->
+   <script src="js/ajax.js"></script> 
+   <!-- Archivo responsable del botón del footer y el div que mostrará la información del juego. -->
+   <script src="js/bienvenida.js"></script>
+ </head>
+
+<body>
+ <!-- Nuestra cabecera de la página tendrá el título y un mensaje. -->
+ <header> 
+ <h1 style="text-align: center;">¡Campo Minado Básico!</h1>
+ <hr />
+ <p style="text-align: center;">Est&aacute;s en un campo minado. Elije las coordenadas para el eje en "Y" y en "X" y que la suerte te depare.</p><br />
+ </header>
+
+ <!-- Nuestro cuerpo o main, donde pondremos nuestro campo del lado izquierdo y un contador del lado derecho. -->
+<main>
+  <!-- Donde irá el campo. -->
+ <div id="CajaIzquierda">
+ <!-- Comienzo del campo de batalla. -->
+  <div id="CajaTabla">
+ 	 <table border="1" width="400px" align="center">
+ 	  <tbody>
+ 	   <tr align="center" id="CeldasVectoresHorizontales">
+ 	 	   <td class="selector"></td>
+ 	 	   <td class="selector">0</td>
+ 	 	   <td class="selector">1</td>
+ 	 	   <td class="selector">2</td>
+ 	 	   <td class="selector">3</td>
+ 	   </tr>
+ 	   <tr align="center">
+ 	 	   <td class="selector">0</td>
+     	 <td id="campo0"></td>
+     	 <td id="campo1"></td>
+     	 <td id="campo2"></td>
+     	 <td id="campo3"></td>
+ 	   </tr>
+ 	   <tr align="center">
+ 		   <td class="selector">1</td>
+       <td id="campo4"></td>
+       <td id="campo5"></td>
+       <td id="campo6"></td>
+       <td id="campo7"></td>
+ 	   </tr>
+ 	   <tr align="center">
+ 		   <td class="selector">2</td>
+ 		   <td id="campo8"></td>
+ 		   <td id="campo9"></td>
+ 		   <td id="campo10"></td>
+ 		   <td id="campo11"></td>
+ 	   </tr>
+ 	   <tr align="center">
+ 		   <td class="selector">3</td>
+ 		   <td id="campo12"></td>
+ 		   <td id="campo13"></td>
+ 		   <td id="campo14"></td>
+ 		   <td id="campo15"></td>
+ 	   </tr>
+ 	  </tbody>
+ 	 </table>
+  </div>
+
+  <!-- Si hay algún error, se le hará saber al usuario. -->
+  <div id="MostrarError" style="display: none;"></div>
+
+  <!-- Le mostrará si perdió, o si ganó. -->
+  <div id="ResultadoCampo"></div>
+ </div>
+
+<!-- Donde se pondrán los puntajes de los usuarios. -->
+ <div id="CajaDerecha">
+  <!-- Mostrará un "Haz sobrevivido:" si el usuario ha sobrevivido mientras juega, en caso de que haya perdido, le mostrará un "Sobreviviste:". -->
+  <div id="MensajePuntajeUsuario"><h2 style='text-align: center;'>Haz sobrevivido: </h2> <br /></div> 
+  <!-- Este es el contador, la variable "NumVecesSobrevir" (ubicada un poco más abajo de este documento) será el que lleve las cuentas a través del archivo "campo.js". -->
+  <div id ="PuntajeUsuario"><p style='text-align: center; color: red;'>0</p></div>
+  <!-- Mostrará "veces." si es 0 o mayor a 1; "vez." si es 1. -->
+  <div id="VecesSobrevivir"><br /> <h2 style='text-align: center;'>veces.</h2></div>
+ </div>
+  
+  <br />
+
+ <!-- Formulario del juego, donde el usuario introducirá las coordenadas que quiere. -->
+ <div id="CajaFormulario" style="text-align: center;">
+ 	<form id="FormularioPrincipal">
+     <!-- Las cajas para los ejes en "Y" y en "X". -->
+     <label>Y:</label><input type="text" id="ComponenteY" placeholder="Valor ..." required="required" />
+     <label>X:</label><input type="text" id="ComponenteX" placeholder="Valor ..." required="required" />
+     <!-- En caso de que pierda, para volver a jugar le apretará a este botón y refrescará la página para volver a iniciar todo. -->
+     <input type="submit" id="IniciarJuego" value="Jugar!" /> <input type="button" onclick="window.location.reload();" value="Volver a jugar" />
+ 	</form>
+ </div>
+
+ <!-- Loader del juego. Se le mostrará mientras dura la ejecución del juego. --> 
+ <div class="loader">
+  <center><i class="fa fa-refresh fa-spin fa-5x"></i></center>
+ </div>
+
+</main>
+
+<!-- Nuestro pié de página tendrá los sonidos. -->
+<footer>
+ <!-- Sonidos -->
+  <!-- Este sonido suena cuando el usuario recién pone sus coordenadas. -->
+  <div id="SonidoLocalizacion" style="display: none;">
+   <audio id="SonidoLocalizacionReproductor" src="sounds/user_location.mp3"></audio>
+  </div>
+  <!-- Este suena cuando el usuario pierde el juego. -->
+  <div id="SonidoPerder" style="display: none;">
+   <audio id="SonidoPerderReproductor" src="sounds/lose.mp3"></audio>
+  </div>
+  <!-- Este suena cuando en el campo que el usuario eligió no hay bomba (gana). --> 
+  <div id="SonidoGanar" style="display: none;">
+   <audio id="SonidoGanarReproductor" src="sounds/win.wav"></audio>
+  </div>
+  <!-- Este suena cuando hay un error. --> 
+  <div id="SonidoError" style="display: none;">
+   <audio id="SonidoErrorReproductor" src="sounds/error.mp3"></audio>
+  </div>
+
+  <!-- Nuestras variables globales del juego. Se declaran aquí para que en ejecuciones mayores a 1 no se vuelvan a inicializar en 0 y mantengan sus valores numéricos originales a los de la anterior partida. -->
+  <script type="text/javascript" id="ContenedorScript">
+  // Variable de repetición, que detecta cuántas veces han transcurrido del juego.
+  var VecesDelJuego = 0; 
+ 
+  // Variable que detecta si el usuario ha perdido o no. 0: No. 1: Sí.
+  var fase = 0;
+ 
+  // Variable que no deja al código generar más campos. 0: Permitir generar campo. 1: No permitir generar campo.
+  var NoGenerarCampos = 0;
+
+  // Variable que detecta cuántas veces ha ganado el usuario.
+  var NumVecesSobrevivir = 0;
+
+  // Variable que se encarga de generar los campos.
+  var GenCampo;
+
+  // Variable para mostrar la información al usuario.
+  var mostrar = 0;
+ </script>
+
+
+ <br />
+ <!-- Caja de texto de información. -->
+ <center><input type="button" value="Mostrar información" id="BotonMostrarInformacion" onclick="MostrarInformacion();" /></center>
+ <div id="Informacion" style="display: none; text-align: center;">
+  <h3>Bienvenido/a a mi juego</h3>
+  <p>Este juego es uno de campo minado y tiene la siguiente dinámica:</p>
+  <p>Introduces unas coordenadas para el eje en X e Y, el programa generará un campo aleatorio, pondrá tu punto dependiendo a tus coordenadas y a continuación, te dirá si perdiste o no. <br/>En caso de que no hayas perdido, podrás seguir jugando hasta que pierdas. El campo aleatorio que te toque siempre será el mismo para todas las veces que juegues hasta que pierdas. <br/>Cuando pierdas, para volver a jugar, tendrás que apretarle en el botón "Volver a jugar", y ahí introducirás otras coordenadas y habrá otro nuevo campo y así sucesivamente ... <br/><h5>¡BUENA SUERTE!</h5></p>
+  <p>Copyright &copy; 2016, Christopher Coria Vásquez.</p>
+ </div>
+  <p style="text-align: left;">¿Quieres descargar el código fuente? <a href="http://files.mastercoria.com/files/downloads/myfiles/juegos/campo-minado.zip">Clic aquí</a>.</p> 
+</footer>
+</body>
+</html>

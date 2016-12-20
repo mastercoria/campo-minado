@@ -9,12 +9,11 @@ Estilos del juego: Campo Minado!
 border: none;
 }
 
-.loader{
-display: none;
-}
-
-header, footer { width: 100%; height: 100px; /* background: #666; */ font-size: 2em; text-align: center; clear: both; } 
+header, footer { width: 100%; height: 100px; /* background: #666; */ font-size: 1.5em; text-align: center; clear: both; } 
 section { position: relative; } 
-#CajaIzquierda { position: relative; width: 70%; top: 0; left: 0; background: #ccc; float: left; height: 200px; } 
-#CajaDerecha { position: relative; width: 30%; top: 0; right: 0; background: #ddf; float: right; height: 200px; } 
+#RegistroJuego { position: relative; width: 50%; top: 50px; left: 0; background: #ddf; float: left; height: 230px; }
+#MensajesDelJuego{ height: 152px; overflow-y: auto; }
+#CajaIzquierda { position: relative; width: 100%; top: 50px; left: 0; background: #ccc; float: center; height: 230px; } 
+#PosicionCoordenada { position: relative; width: 20%; top: 50px; left: 0; background: #ddf; float: left; height: 230px; }
+#CajaDerecha { position: relative; width: 30%; top: 50px; right: 0; background: #ddf; float: right; height: 230px; } 
 /* .esqinfder { position: absolute; bottom: 5px; right: 5px; background: #ff0; } */

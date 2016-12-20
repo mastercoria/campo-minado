@@ -8,13 +8,13 @@ como el proceso se realizará de forma efectiva.
 
 ------------
 Este juego ha sido creado por Christopher Coria Vásquez.
-COPYRIGHT (C) 2016, Master Coria.
+COPYRIGHT (C) 2016 - 2017, Master Coria.
 */
 
 // Cuando el documento esté listo (todos los elementos del DOM), se ejecutará todo entre los corchetes.
 $(document).ready(function(){
  // Seleccionamos la etiqueta HTML "form" y cuando el usuario le de clic en "Jugar!", ejecutará todo entre los corchetes.
- $('form').submit(function(e){
+ $('.campo').click(function(e){
  // Usamos el parámetro de la función anónima que actuará sobre el form para impedir que se recargue la página.	
  e.preventDefault();
 
@@ -22,16 +22,14 @@ $(document).ready(function(){
  Inicializamos el método "$.ajax()", lo que está dentro de los corchetes es lo que ejecutará en tiempo real. Sus parámetros son los siguientes:
  url: la URL de destino a enviar los datos.
  type: el tipo de envío.
- data: los datos a enviar (en nuestro caso, usamos "serializeArray()" para agarrar todos los datos del formulario).
  beforeSend: mostrar algo antes de enviar los datos (en nuestro caso, mostramos un loader).
  success: mostrará algo en caso que haya tenido éxito el envío (en nuestro caso, insertamos en el script con el id "ContenedorScript" la inicialización de la función "IniciarJuego()" del archivo "js/campo.js").
  */
  $.ajax({
  url: 'js/campo.js',	
  type: 'post',
- data: $('FormularioPrincipal').serializeArray(),
  beforeSend: function(){
- $('.loader').css('display', 'inline');
+ $('#loader').html('<i class="fa fa-refresh fa-spin fa-6x"></i>');
  },
  success: function(){
  document.getElementById("ContenedorScript").innerHTML += IniciarJuego();	
@@ -47,7 +45,7 @@ $(document).ready(function(){
  .always(function(){
  setTimeout(function(){	
  console.log("Las operaciones están en proceso ...");
- $(".loader").hide();
+ $("#loader").html("");
  }, 2000);	
  })
  .fail(function(){
@@ -55,6 +53,9 @@ $(document).ready(function(){
  console.log("ERROR: Las operaciones no se pudieron realizar.");
  $("#MostrarError").show();
  $("#MostrarError").html("<br /><span style='color: red; align: center;'>Error: ha ocurrido algo inesperado. Por favor, int&eacute;telo de nuevo m&aacute;s tarde.</span>");
+ $("#MensajesDelJuego").html("<span style='color: red; align: center;'>Ocurrió un error.</span>");
+ // Si aparece el scroll del sistema de mensajes del juego, entonces mandará hasta abajo de los mensajes.
+ $('#MensajesDelJuego').scrollTop($('#MensajesDelJuego')[0].scrollHeight);
  }, 2000);	
  })
  .done(function(){

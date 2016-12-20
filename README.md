@@ -1,4 +1,4 @@
-   ********** JUEGO CAMPO MINADO **********
+                                               Juego de Campo Minado por Christopher Coria Vásquez
 
 Este juego ha sido creado por Christopher Coria Vásquez (Master Coria). Su construcción acabó exitosamente el sábado 17 de septiembre de 2016 a las 14:30 horas (GMT -6 [hora central de México]).
 
